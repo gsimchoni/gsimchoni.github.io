@@ -1,0 +1,7 @@
+---
+title: "Home"
+---
+
+Welcome to my website.
+
+This site is built with [Quarto](https://quarto.org/).

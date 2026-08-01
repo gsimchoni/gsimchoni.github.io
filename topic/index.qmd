@@ -1,0 +1,8 @@
+---
+title: "Topic"
+---
+
+This is the landing page for a grouped series about a particular topic.
+
+Start with the [introduction](introduction.qmd), then continue to the
+[advanced page](advanced.qmd).

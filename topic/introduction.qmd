@@ -1,0 +1,7 @@
+---
+title: "Introduction"
+---
+
+This page introduces the topic and establishes its basic ideas.
+
+Continue to [Advanced](advanced.qmd).

@@ -1,0 +1,26 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "My Website"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: topic/index.qmd
+        text: Topic
+  sidebar:
+    - title: "Topic"
+      contents:
+        - topic/index.qmd
+        - topic/introduction.qmd
+        - topic/advanced.qmd
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+
+editor:
+  render-on-save: true
