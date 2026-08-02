@@ -14,8 +14,7 @@ website:
     - title: "My PhD for Everyone"
       contents:
         - phd/index.qmd
-        - phd/introduction.qmd
-        - phd/advanced.qmd
+        - phd/whats-a-model.qmd
 
 format:
   html:

@@ -1,7 +1,5 @@
 ---
-title: "Introduction"
+title: "What is a model?"
 ---
 
 This page introduces the topic and establishes its basic ideas.
-
-Continue to [Advanced](advanced.qmd).

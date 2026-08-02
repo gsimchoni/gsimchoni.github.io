@@ -4,16 +4,16 @@ title: "My PhD for Everyone"
 
 I started my PhD in the summer of 2020, during COVID, when my eldest daughter started 2nd grade.
 
-I finished my PhD in the summer of 2025, when she finished Elementary School.
+I finished my PhD in the summer of 2025, when she finished elementary school.
 
-It then occurred to me that she would have no idea what I did for the last 5 years.
+It occurred to me that she would have no idea what I had been up to for the past five years. After all, a history or sociology PhD can usually explain their thesis to a curious twelve-year-old in a sentence or two. We number-geeks rarely get off that easily.
 
 So I decided to write a series of short posts about my PhD for her without university-level math and statistics, using as little jargon, code and formulas as possible.
 
-Then I was reminded that my daughter's hatred towards school and math in particular is second to none, that kids don't always connect with their parents' interests, and that that is fine.
+Then I was reminded that my daughter's hatred of school - and math in particular - is unrivaled, that kids don't always connect with their parents' interests, and that this is fine.
 
 So this is my PhD for everyone.
 
-Note that you can always just read the thesis [here](../index.qmd), if you like.
+Note that you can always read the thesis [here](../index.qmd), if you like ^[Though I make no claims about its greatness].
 
-However, if you are like my daughter, and you start yawning even at the title "Random Effects in Deep Neural Networks" (what?), then you better start with [what is a model](introduction.qmd).
+However, if you're like my daughter, and you start yawning even at the mere title "Random Effects in Deep Neural Networks" (what?), then you'd better start with [what is a model](whats-a-model.qmd) ^[I'd cautiously claim that even some people with a PhD in math or statistics should start there as well.].

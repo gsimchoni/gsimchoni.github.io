@@ -1,5 +1,0 @@
----
-title: "Advanced"
----
-
-This page continues the series with more advanced material.
