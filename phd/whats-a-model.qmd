@@ -1,6 +1,14 @@
 ---
-title: "What is a model?"
+pagetitle: "What is a model?"
+toc: true
+format:
+  html:
+    body-classes: post-page
 ---
+
+![](../images/nike.png){.post-image}
+
+# What is a model?
 
 When I was a kid, my grandmother lived on the other side of the world, and she would come visit us once every one or two years. Among the many gifts she would bring was a pair of brand new sneakers. In the 1980s, this was a big deal.
 
@@ -12,9 +20,9 @@ I have no idea. Maybe she could call some of her friends to see if they had a 5-
 
 That's actually not a bad idea. A bit of a hassle, but not unreasonable.
 
-However, as any parent knows, the size of a kid's sneakers can change rapidly. There's quite a difference between the size of a 5-year-old's sneakers and the size of a 5-year-and-8-month-old's sneakers. What if she didn't have a single friend with a 5-year-and-8-month-old grandchild?
+However, as any parent knows, the size of a kid's sneakers can change rapidly. There's quite a difference between the shoe size of a 5-year-old and the shoe size of a 5-year-8-month-old. What if she didn't have a single friend with a 5y8m-old grandchild?
 
-This is where a pen and a piece of paper come in handy^[Or a Lotus 1-2-3 spreadsheet since we're in the 1980s, and yes my grandmother had one of those.].
+This is where a pen and a piece of paper come in handy^[Or a Lotus 1-2-3 spreadsheet since we're in the 1980s, and yes my grandmother had one of those.]. My grandmother wrote down the shoe sizes of her friends' grandchildren, and their ages (two numbers per child), and plotted them. Each dot below is one child — x is age, y is shoe size.
 
 ```{python}
 #| echo: false
@@ -42,9 +50,7 @@ ax.set_xticks(range(1, 11))
 plt.show()
 ```
 
-So my grandmother wrote down the shoe sizes of her friends' grandchildren, and their ages (two numbers per child), and plotted them. Each dot above is one child — x is age, y is shoe size.
-
-As can be seen, there is no kid with an age of 5 years and 8 months. But a good intuition is to make an educated guess, to fill in the blank, or... to *interpolate*. If we look at the plot above, we can see that the shoe sizes are increasing with age. Specifically, they seem to follow a "hidden" line that my grandmother could easily draw.
+As can be seen, there is no kid with an age of 5y8m. But a good intuition is to make an educated guess, to fill in the blank, or... to *interpolate*. If we look at the plot above, we can see that the shoe sizes are increasing with age. Specifically, they seem to follow a "hidden" line that my grandmother could easily draw.
 
 ```{python}
 #| echo: false
@@ -63,7 +69,7 @@ ax.set_xticks(range(1, 11))
 plt.show()
 ```
 
-From this line, my grandmother could easily estimate the shoe size of a 5-year-and-8-month-old grandchild. Starting at 5 years and 8 months on the x-axis, she could draw a vertical dashed line up to the red line, then a horizontal one across to the y-axis, and read off the resulting y-coordinate.
+From this line, my grandmother could easily estimate the shoe size of a 5y8m-old grandchild. Starting at 5y8m on the x-axis, she could draw a vertical dashed line up to the red line, then a horizontal one across to the y-axis, and read off the resulting y-coordinate.
 
 ```{python}
 #| echo: false
@@ -95,7 +101,7 @@ ax.annotate("27", xy=(xmin, y_star), xytext=(3, 3), textcoords="offset points",
 plt.show()
 ```
 
-Voila! My grandmother could estimate my shoe size a year in advance at about 27.
+Voila! My grandmother could estimate my shoe size a year in advance to be about 27.
 
 You might claim this is a huge effort for a single shoe size. But notice that red line. My grandmother can now *generalize* to any kid: feed in an age, read off a size. That red line is a model.
 
@@ -111,4 +117,4 @@ This formula is a model too. It's the same model, but it's written in a differen
 
 Some would say this form of the model is also more interesting. If we input age 0, we would see that a newborn's shoe size is 18.5^[Real newborns don't actually wear size 18.5, of course. But that's a story for another day.]. That is the line's intercept. And the line's slope of 1.5 means that every year, the shoe size increases by 1.5 sizes.
 
-How did my grandmother get these numbers? Shouldn't she make a separate model for boys and girls? Can she *extrapolate* to my shoe size in 20 years? What if the relationship wasn't a straight line, but a curve? All valid questions. For now, let's finish by saying that for us, a model is a relationship between two or more quantities. It can be represented graphically (here, a line) or mathematically (here, the line's equation).
+How did my grandmother get these numbers? Shouldn't she make a separate model for boys and girls? Can she *extrapolate* to my shoe size in 20 years? What if the relationship wasn't a straight line, but a curve? What about all those kids for whom the model is clearly wrong? My grandmother knows me, could she have taken my shoe size when she last saw me into account? All valid questions. For now, let's finish by saying that for us, a model is a relationship between two or more quantities. It can be represented graphically (here, a line) or mathematically (here, the line's equation).

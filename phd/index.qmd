@@ -1,10 +1,16 @@
 ---
-title: "My PhD for Everyone"
+pagetitle: "My PhD for Everyone"
+toc: true
+format:
+  html:
+    body-classes: post-page
 ---
 
-I started my PhD in the summer of 2020, during COVID, when my eldest daughter started 2nd grade.
+![](../images/phd.png){.post-image}
 
-I finished my PhD in the summer of 2025, when she finished elementary school.
+# My PhD for Everyone
+
+I started my PhD in the summer of 2020, during COVID, when my eldest daughter started 2nd grade. I finished my PhD in the summer of 2025, when she finished elementary school.
 
 It occurred to me that she would have no idea what I had been up to for the past five years. After all, a history or sociology PhD can usually explain their thesis to a curious twelve-year-old in a sentence or two. We number-geeks rarely get off that easily.
 

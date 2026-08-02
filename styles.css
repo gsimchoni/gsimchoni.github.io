@@ -1,0 +1,11 @@
+.post-image {
+  display: block;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  object-fit: cover;
+}
+
+.post-page #quarto-margin-sidebar {
+  visibility: hidden !important;
+}

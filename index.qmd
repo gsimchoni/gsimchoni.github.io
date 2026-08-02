@@ -1,7 +1,13 @@
 ---
-title: "Home"
+pagetitle: "Welcome."
+toc: false
 ---
 
-Welcome to my website.
+![](images/randy.png){.post-image}
 
-This site is built with [Quarto](https://quarto.org/).
+# Welcome.
+
+My name is Giora Simchoni. This is my website.
+
+<br>
+<small>This site is built with [Quarto](https://quarto.org/).</small>

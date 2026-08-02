@@ -4,6 +4,11 @@ project:
 
 website:
   title: "My Website"
+  favicon: images/randy.png
+  page-navigation: true
+  page-footer:
+    center: "Copyright 2026, Giora Simchoni"
+    border: light
   navbar:
     left:
       - href: index.qmd
@@ -19,6 +24,7 @@ website:
 format:
   html:
     theme: cosmo
+    css: styles.css
     toc: true
 
 editor:
