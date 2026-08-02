@@ -8,14 +8,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: topic/index.qmd
-        text: Topic
+      - href: phd/index.qmd
+        text: My PhD for Everyone
   sidebar:
-    - title: "Topic"
+    - title: "My PhD for Everyone"
       contents:
-        - topic/index.qmd
-        - topic/introduction.qmd
-        - topic/advanced.qmd
+        - phd/index.qmd
+        - phd/introduction.qmd
+        - phd/advanced.qmd
 
 format:
   html:

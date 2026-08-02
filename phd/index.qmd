@@ -1,8 +1,8 @@
 ---
-title: "Topic"
+title: "My PhD for Everyone"
 ---
 
-This is the landing page for a grouped series about a particular topic.
+This is the landing page for a grouped series about my PhD.
 
 Start with the [introduction](introduction.qmd), then continue to the
 [advanced page](advanced.qmd).
