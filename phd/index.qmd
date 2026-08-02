@@ -2,7 +2,18 @@
 title: "My PhD for Everyone"
 ---
 
-This is the landing page for a grouped series about my PhD.
+I started my PhD in the summer of 2020, during COVID, when my eldest daughter started 2nd grade.
 
-Start with the [introduction](introduction.qmd), then continue to the
-[advanced page](advanced.qmd).
+I finished my PhD in the summer of 2025, when she finished Elementary School.
+
+It then occurred to me that she would have no idea what I did for the last 5 years.
+
+So I decided to write a series of short posts about my PhD for her without university-level math and statistics, using as little jargon, code and formulas as possible.
+
+Then I was reminded that my daughter's hatred towards school and math in particular is second to none, that kids don't always connect with their parents' interests, and that that is fine.
+
+So this is my PhD for everyone.
+
+Note that you can always just read the thesis [here](../index.qmd), if you like.
+
+However, if you are like my daughter, and you start yawning even at the title "Random Effects in Deep Neural Networks" (what?), then you better start with [what is a model](introduction.qmd).
