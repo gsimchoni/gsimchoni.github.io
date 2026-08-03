@@ -13,13 +13,14 @@ website:
     left:
       - href: index.qmd
         text: Home
-      - href: phd/index.qmd
+      - href: phd/01_index.qmd
         text: My PhD for Everyone
   sidebar:
-    - title: "My PhD for Everyone"
+    - title: "My PhD for Everyone1"
       contents:
-        - phd/index.qmd
-        - phd/whats-a-model.qmd
+        - phd/01_index.qmd
+        - phd/02_whats_a_model.qmd
+        - phd/03_learning.qmd
 
 format:
   html:

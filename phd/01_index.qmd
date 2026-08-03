@@ -22,4 +22,4 @@ So this is my PhD for everyone.
 
 Note that you can always read the thesis [here](../index.qmd), if you like^[Though I make no claims about its greatness].
 
-However, if you're like my daughter, and you start yawning even at the mere title "Random Effects in Deep Neural Networks" (what?), then you'd better start with [what is a model](whats-a-model.qmd)^[I'd cautiously claim that even some people with a PhD in math or statistics should start there as well.].
+However, if you're like my daughter, and you start yawning even at the mere title "Random Effects in Deep Neural Networks" (what?), then you'd better start with [what is a model](02_whats_a_model.qmd)^[I'd cautiously claim that even some people with a PhD in math or statistics should start there as well.].
