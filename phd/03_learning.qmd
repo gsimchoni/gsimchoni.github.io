@@ -22,41 +22,7 @@ $$
 
 Johann was left with a rule. My grandmother was left with a model. An equation, which we could write even more concisely as the group of numbers the model has: $(18.5, 1.5)$.
 
-In the case of my grandmother's model, the *compression* view of learning is even more appropriate. She started with 40 numbers (20 pairs of age and shoe-size), and compressed them to just two numbers, 18.5 and 1.5. From 40 to 2 -- that's 20 times fewer numbers, much more compact than the original data.
-
-The same idea applies when we view the model *graphically*, as the red line she drew through the 20 dots:
-
-```{python}
-#| echo: false
-#| fig-align: center
-import numpy as np
-import matplotlib.pyplot as plt
-
-rng = np.random.default_rng(7)
-
-ages_a = rng.integers(1, 11, size=10)
-sizes_a = 19 + 1.6 * ages_a + rng.normal(0, 0.7, size=10)
-
-ages_b = rng.integers(1, 11, size=10)
-sizes_b = 18 + 1.5 * ages_b + rng.normal(0, 0.7, size=10)
-
-ages = np.concatenate([ages_a, ages_b])
-sizes = np.concatenate([sizes_a, sizes_b])
-
-slope, intercept = np.polyfit(ages, sizes, 1)
-line_x = np.array([1, 10])
-line_y = intercept + slope * line_x
-
-fig, ax = plt.subplots(figsize=(6, 4))
-ax.scatter(ages, sizes, color="black")
-ax.plot(line_x, line_y, color="red", linewidth=3)
-ax.set_xlabel("Age (years)")
-ax.set_ylabel("Shoe size (EU)")
-ax.set_xticks(range(1, 11))
-plt.show()
-```
-
-When an unknown kid arrives, instead of asking for two numbers -- age and shoe-size -- to fully describe them, we only need to ask for their age, and then use the model to estimate their shoe-size. From 2 numbers to 1. Or, instead of needing a 2-D plot to place each kid, we just need to know how far along the red line they are. From 2-D to 1-D. Compression, either way.
+In the case of my grandmother's model, the *compression* view of learning is even more appropriate. She started with 40 numbers (20 pairs of age and shoe-size), and compressed them to just two numbers, 18.5 and 1.5. From 40 to 2 -- that's 20 times fewer numbers, much more compact than the original data^[There's also a *geometric* version of this argument: in the 2-D plot from the previous post, the fitted line looks like a 1-D "summary axis" through the data, so we could describe each kid by a single number (how far along the line they are) instead of two (age and shoe-size). But this is largely a coincidence of being in two dimensions -- with $P$ predictors a regression hyperplane only shaves one dimension off the data, which isn't much of a compression. The genuinely geometric version of learning-as-compression is *PCA*, which we might meet later.].
 
 These numbers -- 18.5 and 1.5 -- are called the model's *parameters*^[You'd also hear them called *coefficients* or *weights*.]. In this case, they are the *slope* and *intercept* of the line. If this is familiar, you might have heard this in the context of AI or large language models (LLMs), like ChatGPT, which upon its release in 2022 was said to have 175 billion parameters^[I'm guessing that at the time of writing this, it has well over 10 trillion parameters.]. Now *these* parameters may have lost their geometrical meaning, but they are parameters of a model in exactly the same way as 18.5 and 1.5 are parameters of my grandmother's model.
 
