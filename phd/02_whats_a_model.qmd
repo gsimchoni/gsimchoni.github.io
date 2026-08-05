@@ -22,7 +22,7 @@ That's actually not a bad idea. A bit of a hassle, but not unreasonable.
 
 However, as any parent knows, the size of a kid's sneakers can change rapidly. There's quite a difference between the shoe size of a 5-year-old and the shoe size of a 5-year-8-month-old. What if she didn't have a single friend with a 5y8m-old grandchild?
 
-This is where a pen and a piece of paper come in handy^[Or a Lotus 1-2-3 spreadsheet since we're in the 1980s, and yes my grandmother had one of those.]. My grandmother wrote down the shoe sizes of her friends' grandchildren, and their ages (two numbers per child), and plotted them. Each dot below is one child — x is age, y is shoe size.
+This is where a pen and a piece of paper come in handy^[Or a Lotus 1-2-3 spreadsheet since we're in the 1980s, and yes my grandmother had one of those.]. My grandmother wrote down the shoe sizes of her friends' grandchildren, and their ages (two numbers per child), and plotted them. Each dot below is one child --- x is age, y is shoe size.
 
 ```{python}
 #| echo: false

@@ -21,6 +21,7 @@ website:
         - phd/01_index.qmd
         - phd/02_whats_a_model.qmd
         - phd/03_learning.qmd
+        - phd/04_overfitting.qmd
 
 format:
   html:
