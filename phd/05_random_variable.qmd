@@ -1,0 +1,196 @@
+---
+pagetitle: "Random Variable"
+toc: true
+format:
+  html:
+    body-classes: post-page
+---
+
+![](../images/girls.png){.post-image}
+
+# Random Variable
+
+After having our first daughter, my partner and I learned that we were expecting twins. Do you think that they could both be girls? my partner asked me. No, I replied, blinded by my wish to have a boy. There's no chance of us having three girls, I said. Trust me, I'm a statistician.
+
+Above you can see a picture of our three beautiful girls.
+
+Let us ignore, for a moment, the fact that we already had one girl. What is the probability of having three girls in a family of three children, a.k.a. $P(3 \text{ girls})$? Well, if we assume that the probability of having a girl is $\frac{1}{2}$, and that the sex of each child is independent of the others^[Neither assumption is realistic, but they are a good approximation for the purpose of this example.], then the probability of having three girls is:
+
+$$
+P(3 \text{ girls}) = P(\text{1st girl}) \times P(\text{2nd girl}) \times P(\text{3rd girl}) = \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{8}
+$$
+
+That is, if our assumptions are correct, we would find 3 girls in approximately 1 in every 8 families with 3 children. 12.5%. Already not a very unlikely event, but like I said, I really wanted a boy.
+
+Where did the rest of the probability go --- 100% - 12.5% = 87.5%? Let's consider the other possible outcomes.
+
+$$
+P(0 \text{ girls}) = P(\text{1st boy}) \times P(\text{2nd boy}) \times P(\text{3rd boy}) = \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{1}{8}
+$$
+
+$$
+\begin{align}
+P(1 \text{ girl}) &= P(\text{girl, boy, boy}) + P(\text{boy, girl, boy}) + P(\text{boy, boy, girl}) \\
+&= P(\text{girl}) \times P(\text{boy}) \times P(\text{boy}) \\
+&+ P(\text{boy}) \times P(\text{girl}) \times P(\text{boy}) \\
+&+ P(\text{boy}) \times P(\text{boy}) \times P(\text{girl}) \\
+&= 3 \times \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{3}{8}
+\end{align}
+$$
+
+$$
+\begin{align}
+P(2 \text{ girls}) &= P(\text{girl, girl, boy}) + P(\text{girl, boy, girl}) + P(\text{boy, girl, girl}) \\
+&= P(\text{girl}) \times P(\text{girl}) \times P(\text{boy}) \\
+&+ P(\text{girl}) \times P(\text{boy}) \times P(\text{girl}) \\
+&+ P(\text{boy}) \times P(\text{girl}) \times P(\text{girl}) \\
+&= 3 \times \frac{1}{2} \times \frac{1}{2} \times \frac{1}{2} = \frac{3}{8}
+\end{align}
+$$
+
+Putting it all together in a nice table, we get:
+
+| $G$ - no. of girls in a family of 3 children | 0 | 1 | 2 | 3 |
+|-------------|----|---|---|---|
+| probability | 1/8 | 3/8 | 3/8 | 1/8 |
+
+And we can see that the sum of the probabilities is 1, as it should be. I also put another symbol there, that is: $G$. I call $G$ a *random variable*. A random variable is a quantity that can take on different values randomly, and the probability of each value is given by a probability distribution. If the random variable takes on only a few distinct values, like in this case, a table is a good way to represent the probability distribution. If the random variable takes on many values, like the height of a person, a bar chart might be more appropriate.
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the random variable
+G = np.array([0, 1, 2, 3])
+
+# Define the probability distribution
+P = np.array([1/8, 3/8, 3/8, 1/8])
+
+# Plot the probability distribution
+plt.bar(G, P)
+plt.xlabel('G')
+plt.ylabel('P(G)')
+plt.xticks(G)
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+If we were talking about the number of girls in a family of 10 children, following the same assumptions, the probability distribution would be:
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the random variable
+G = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+
+# Define the probability distribution
+P = np.array([(1/2)**10, 10*(1/2)**9*(1/2), 45*(1/2)**8*(1/2)**2, 120*(1/2)**7*(1/2)**3, 210*(1/2)**6*(1/2)**4, 252*(1/2)**5*(1/2)**5, 210*(1/2)**4*(1/2)**6, 120*(1/2)**3*(1/2)**7, 45*(1/2)**2*(1/2)**8, 10*(1/2)**1*(1/2)**9, (1/2)**10])
+
+# Plot the probability distribution
+plt.bar(G, P)
+plt.xlabel('G')
+plt.ylabel('P(G)')
+plt.xticks(G)
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+(Notice that even in this case, the probability of not having any boys would be $\frac{1}{2^{10}} = \frac{1}{1024} \approx 0.001$. Unlikely, but not impossible.)
+
+As the number of children increases, the distribution of $G$ starts to take a familiar shape, doesn't it? Let's plot it for 100 children.
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+import scipy as sp
+
+G = np.linspace(0, 100, 101)
+P = sp.special.comb(100, G) * (1/2)**100
+
+# Plot the probability distribution
+plt.bar(G, P)
+plt.xlabel('G')
+plt.ylabel('P(G)')
+plt.xticks(np.linspace(0, 100, 11))
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+This is what we call a *bell curve*. It is a symmetric distribution that is centered at the middle (50 girls, in the case of 100 children). It is also known as the *normal distribution*. Well, not exactly. If we say a random variable is normally distributed, we also mean that it is *continuous* and doesn't necessarily take on nice integer values like the number of girls in a family of 3 children, and in fact, it can take on any value in a continuous range from minus infinity to plus infinity.
+
+In that case, we would also be speaking of a probability *density* function $f(G)$ and would require a continuous line to represent the probability distribution:
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import norm
+
+G = np.linspace(0, 100, 501)
+f = norm.pdf(G, loc=50, scale=5)
+
+plt.plot(G, f)
+plt.xlabel('G')
+plt.ylabel('f(G)')
+plt.xticks(np.linspace(0, 100, 11))
+plt.xlim(-5, 105)
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+You see how this line approximates the bar chart above?
+
+Why would we want to approximate a *discrete* distribution with a continuous one? Well, it's because it's easier to work with. For one thing, the normal distribution is fully defined by two numbers: its mean --- the center of the distribution --- and a quantity called the *variance*, which is a measure of how spread out the distribution is. The higher the variance, the more spread out the distribution is. The distribution above, for example, is centered at 50, and has a variance of 25. We call this an $\mathcal{N}(50, 25)$ distribution and mark:
+
+$$G \sim \mathcal{N}(50, 25)$$
+
+If this means nothing to you, you are in good company. I will, however, draw some additional normal distributions to help you develop a better intuition about the mean and variance. Suppose $X$ is a random variable representing the height of a person, and that it distributes normally with a mean of 170 cm and some variance.
+
+```{python}
+#| echo: false
+#| fig-align: center
+#| out-width: 100%
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.stats import norm
+
+dists = [
+    dict(mu=170, var=1, xlabel="X", ylabel="f(x)", title="N(170, 1)"),
+    dict(mu=170, var=5, xlabel="X", ylabel="", title="N(170, 5)"),
+    dict(mu=170, var=20, xlabel="X", ylabel="", title="N(170, 20)"),
+]
+
+half_width = 50
+
+fig, axes = plt.subplots(1, 3, figsize=(7.5, 2.8))
+
+for ax, d in zip(axes, dists):
+    sigma = np.sqrt(d["var"])
+    x = np.linspace(d["mu"] - half_width, d["mu"] + half_width, 1001)
+    ax.plot(x, norm.pdf(x, loc=d["mu"], scale=sigma))
+    ax.set_xlabel(d["xlabel"])
+    ax.set_ylabel(d["ylabel"])
+    ax.set_title(d["title"])
+    ax.set_ylim(0, 0.4)
+    ax.set_xlim(d["mu"] - half_width, d["mu"] + half_width)
+
+fig.tight_layout()
+plt.show()
+```
+
+See how with increased variance, the distribution becomes more spread out? This is not just a technical detail regarding the shape of the distribution, but it also has a practical consequence. The variance is a measure of the *uncertainty* of the random variable. The higher the variance, the more uncertain the random variable is. If the variance is 1, like in the leftmost distribution above, we are very certain that the height of a random person is around 170 cm, almost no uncertainty, no variability, height is predictable. If the variance is 20, like in the rightmost distribution, we are much more uncertain about the height of a random person.
+
+At this point you are probably wondering: what does this have to do with my grandmother's model?

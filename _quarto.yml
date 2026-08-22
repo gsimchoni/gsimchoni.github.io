@@ -22,7 +22,7 @@ website:
         - phd/02_whats_a_model.qmd
         - phd/03_learning.qmd
         - phd/04_overfitting.qmd
-
+        - phd/05_random_variable.qmd
 format:
   html:
     theme: cosmo

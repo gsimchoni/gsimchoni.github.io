@@ -101,7 +101,7 @@ Remember, my grandmother used the same 20 kids. Previously she had used them to 
 
 Trade-off of what?
 
-Let's take this to the extreme. Look at the data again and tell me if a straight line is *the* best fit to the data. After all, some of the real data points are not on a straight line, so why not use a curve? Why not:
+Let's take this to the extreme. Look again and tell me if a straight line is *the* best fit to the data. After all, some of the real data points are not on a straight line, so why not use a curve? Why not:
 
 $$
 \text{shoe size} =
@@ -174,9 +174,9 @@ So a trade-off of what?
 
 The trade-off between the model's complexity and its ability to generalize to new data. In the above example, the model was so complex it was able to fit the data almost perfectly, but it was not able to generalize to new data. And the root of this phenomenon called overfitting is trying to fit as many parameters as possible, regardless of whether they are necessary or not. There's only so much you can learn with 20 observations. And with only 1 observation you can't learn anything, Mom.
 
-How do we know when a model is overfitting? Who can say if the parameters are necessary or not?
+How do we know when a model is overfitting? Who can say if the additional parameters are necessary or not?
 
-The famous statistician [George Box](https://en.wikipedia.org/wiki/George_E._P._Box) said: "All models are wrong, but some are useful." To me this says we should assume the model is wrong, that there is some error, noise, or *variability* in the data that we are not accounting for, and cannot account for. If we strive for the most complex model possible, it will start "eating" from that variability, fitting the noise, instead of learning the underlying pattern. And we should use a simpler model that is easier to understand and interpret.
+The famous statistician [George Box](https://en.wikipedia.org/wiki/George_E._P._Box) said: "All models are wrong, but some are useful." To me this says we should assume the model is wrong, that there is some error, noise, or *variability* in the data that we are not accounting for, and cannot account for, with our given budget of observations. If we strive for the most complex model possible, it will start "eating" from that variability, fitting the noise, instead of learning an underlying general pattern. And we should use a simpler model that is easier to understand and interpret. One that our limited data can afford to learn.
 
 Once you internalize this, you will check yourself. Of course there are formal (and less formal) methods to test for overfitting, but nothing beats looking at the data and asking yourself whether these parameters are "worth it". Above we quantified this: adding just two parameters to the model (to separate boys and girls) reduced the sum of squares by 80%. That seems like a good trade-off. From that point, the return on adding more parameters started to diminish, despite the fact that the sum of squares kept going down. With added parameters, it can only go down. Wikipedia can be memorized. This won't help ChatGPT think of a new chicken parmesan recipe.
 
