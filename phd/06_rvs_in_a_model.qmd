@@ -6,7 +6,56 @@ format:
     body-classes: post-page
 ---
 
-![](../images/girls.png){.post-image}
+![](../images/freud.png){.post-image}
 
 # Random variables in a model?
+
+I have a BA in psychology. I'm not entirely sure why, and it's been 20 years since I graduated. Anyway, one of the few memories that stuck with me is sitting in a class and hearing that Sigmund Freud theorized that by around age four, the basic structure of personality has already been established. My friends and I laughed. How ridiculous.
+
+It wasn't until I had kids of my own that I realized --- and I'm sorry if this offends all you positive-psychology-people-can-change devotees out there --- Sigmund was spot on. If anything, he could have gone even further. I knew exactly who each of my kids were by the time they were one month old.
+
+Am I claiming one's entire life is determined at age four? No. But it sure helps to know one's shoe size at age four to determine their shoe size at age five and eight months!
+
+That is why I'm a bit embarrassed to tell you of another small detail I forgot to mention about my grandmother's data of 20 kids' shoe sizes. You see, there weren't really 20 kids, it was more like 10 kids, each with 1-4 shoe sizes at different ages. And, one of those kids was me, at age four.
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import numpy as np
+import matplotlib.pyplot as plt
+
+rng = np.random.default_rng(7)
+
+ages_a = rng.integers(1, 11, size=10)
+sizes_a = 19 + 1.6 * ages_a + rng.normal(0, 0.7, size=10)
+
+ages_b = rng.integers(1, 11, size=10)
+sizes_b = 18 + 1.5 * ages_b + rng.normal(0, 0.7, size=10)
+
+# the same 20 observations, now grouped into 10 kids
+kids_a = [[9], [8, 7], [2, 3, 5], [0, 6], [1, 4]]
+kids_b = [[1, 4, 5, 7], [0, 8], [6, 9], [2], [3]]
+
+groups = ([(idx, "o", ages_a, sizes_a) for idx in kids_a] +
+          [(idx, "^", ages_b, sizes_b) for idx in kids_b])
+
+colors = plt.get_cmap("tab10").colors
+
+fig, ax = plt.subplots(figsize=(7.5, 4))
+
+for kid, (idx, marker, ages, sizes) in enumerate(groups, start=1):
+    age = ages[idx]
+    size = sizes[idx]
+    order = np.argsort(age)
+    ax.plot(age[order], size[order], marker=marker, color=colors[kid - 1],
+            markeredgecolor="white", markeredgewidth=0.6, label=f"Kid {kid}")
+
+ax.set_xlabel("Age (years)")
+ax.set_ylabel("Shoe size (EU)")
+ax.set_xticks(range(1, 11))
+ax.legend(loc="upper left", bbox_to_anchor=(1.02, 1), frameon=False)
+fig.tight_layout()
+plt.show()
+```
 
