@@ -152,7 +152,11 @@ plt.show()
 
 You see how this line approximates the bar chart above?
 
-Why would we want to approximate a *discrete* distribution with a continuous one? Well, it's because it's easier to work with. For one thing, the normal distribution is fully defined by two numbers: its mean --- the center of the distribution --- and a quantity called the *variance*, which is a measure of how spread out the distribution is. The higher the variance, the more spread out the distribution is. The distribution above, for example, is centered at 50, and has a variance of 25. We call this an $\mathcal{N}(50, 25)$ distribution and mark:
+Wait, I'm sorry, what? Minus infinity and plus infinity? Any value in between? So, can one have 2.18, or -8.0 girls? Obviously not. But we can still use the normal distribution to approximate the probability distribution of $G$ for a large number of children in the family.
+
+Why would we want to approximate a *discrete* distribution with a continuous one? Well, it's because it's easier to work with. For example, for a family of 10 children, try calculating the probability of having less than 6 girls, a.k.a. $P(G < 6)$. It's not that difficult, you would just sum up the probabilities of having 0, 1, 2, 3, 4, 5 girls, but it's a bit tedious. With 100 children, it's downright exhausting. With the normal distribution, we have tools to calculate this easily.
+
+The normal distribution is fully defined by two numbers or parameters: its mean --- the center of the distribution --- and a quantity called the *variance*, which is a measure of how spread out the distribution is. The higher the variance, the more spread out the distribution is. The distribution above, for example, is centered at 50^[The mean is also called the *expected value* of the random variable. In a family of 100 children, the expected number of girls is 50, half of the children, sounds reasonable, doesn't it?], and has a variance of 25. We call this an $\mathcal{N}(50, 25)$ distribution and mark:
 
 $$G \sim \mathcal{N}(50, 25)$$
 
@@ -193,4 +197,4 @@ plt.show()
 
 See how with increased variance, the distribution becomes more spread out? This is not just a technical detail regarding the shape of the distribution, but it also has a practical consequence. The variance is a measure of the *uncertainty* of the random variable. The higher the variance, the more uncertain the random variable is. If the variance is 1, like in the leftmost distribution above, we are very certain that the height of a random person is around 170 cm, almost no uncertainty, no variability, height is predictable. If the variance is 20, like in the rightmost distribution, we are much more uncertain about the height of a random person.
 
-At this point you are probably wondering: what does this have to do with my grandmother's model?
+At this point you are probably wondering: what does this have to do with my grandmother's model? Shall I give you a hint? If you read carefully, you will see that I already did.

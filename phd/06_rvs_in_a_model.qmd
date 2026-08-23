@@ -1,0 +1,12 @@
+---
+pagetitle: "Random variables in a model?"
+toc: true
+format:
+  html:
+    body-classes: post-page
+---
+
+![](../images/girls.png){.post-image}
+
+# Random variables in a model?
+
