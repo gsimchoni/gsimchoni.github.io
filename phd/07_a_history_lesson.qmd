@@ -1,0 +1,11 @@
+---
+pagetitle: "A history lesson"
+toc: true
+format:
+  html:
+    body-classes: post-page
+---
+
+![](../images/freud.png){.post-image}
+
+# A history lesson
