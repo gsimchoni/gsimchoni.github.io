@@ -8,7 +8,7 @@ format:
 
 ![](../images/girls.png){.post-image}
 
-# Random Variable
+# Random variable
 
 After having our first daughter, my partner and I learned that we were expecting twins. Do you think that they could both be girls? my partner asked me. No, I replied, blinded by my wish to have a boy. There's no chance of us having three girls, I said. Trust me, I'm a statistician.
 
