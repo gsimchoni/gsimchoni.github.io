@@ -18,6 +18,8 @@ Am I claiming one's entire life is determined at age four? No. But it sure helps
 
 That is why I'm a bit embarrassed to tell you of another small detail I forgot to mention about my grandmother's data of 20 kids' shoe sizes. You see, there weren't really 20 kids, it was more like 10 kids, each with 1-4 shoe sizes at different ages. And, one of those kids was me, at age four.
 
+If we put the data in a table, where each row is a kid and each column is an age, it looks like this:
+
 
 | Kid | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |-----|---|---|---|---|---|---|---|---|---|----|
@@ -166,6 +168,6 @@ Let's not worry for a moment how we would evaluate these random-variable samples
 
 What would we gain from this?
 
-A lot. For one, we would have only two additional parameters to learn --- instead of 20! --- the variances of the random variables' normal distributions. All intercept-diffs will *share* a single parameter, and all slope-diffs will *share* a single parameter. Much less chance of overfitting. In addition, we will later show how treating each kid's intercept-diff and slope-diff as a random variable sample makes them *shrink* towards 0, making each kid's intercept and slope closer to the global model's intercept and slope, and the fewer observations a kid has, the higher the shrinkage. Why is that a good thing? That overfitting again, you want to take a kid's intercept and slope with a grain of salt if they are based on fewer observations. Lastly, we have just crossed the border towards --- brace yourselves, trust me, it won't hurt --- probabilistic models. Models based on random variables. Models based on probability. These tend to be more robust and more interpretable.
+A lot. For one, we would have only two additional parameters to learn --- instead of 20! --- the variances of the random variables' normal distributions. All intercept-diffs will *share* a single parameter, and all slope-diffs will *share* a single parameter. Much less chance of overfitting. In addition, we will later show how treating each kid's intercept-diff and slope-diff as a random variable sample makes them *shrink* towards 0, making each kid's intercept and slope closer to the global model's intercept and slope, and the fewer observations a kid has, the higher the shrinkage. Why is that a good thing? That overfitting again, you want to take a kid's intercept and slope with a grain of salt if they are based on fewer observations. Moreover, those $\text{var}_{\text{intercept}}$ and $\text{var}_{\text{slope}}$ parameters --- for some researchers, they could mean a lot, or even everything.^[For now, ask yourself: what does it mean if they are very very small, close to zero? Very large?] Lastly, we have just crossed the border towards --- brace yourselves, trust me, it won't hurt --- probabilistic models. Models based on random variables. Models based on probability. These tend to be more robust and more interpretable.
 
 So, a model with both *fixed* parameters and *random* variables samples? That's crazy. I bet you're dying to know how it works. Soon. Very soon. But first, a short history lesson.

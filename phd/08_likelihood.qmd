@@ -1,0 +1,82 @@
+---
+pagetitle: "Likelihood"
+toc: true
+format:
+  html:
+    body-classes: post-page
+---
+
+![](../images/agatha.png){.post-image}
+
+# Likelihood
+
+Have you ever wondered how a crime novelist writes a story?
+
+It is well known that Agatha Christie, for the most part, started with the crime. She would have the murder --- or rather the mechanism or literary trick she wanted to use --- written down, before she started writing the story, obscuring the details, making it difficult for the detective and her readers to decipher the crime.
+
+But there are other ways to write a crime novel.
+
+A lesser known American crime novelist, [Martha Grimes](https://en.wikipedia.org/wiki/Martha_Grimes), started with the evidence. She would have the body of the victim found, and from there she would build the story, discovering the culprit, the way the victim was killed and the motive, as she went along.
+
+If you had to write a murder mystery, would you start with the crime or with the evidence? Are you an Agatha or a Martha?
+
+In statistics, we're often both.
+
+Previously, I asked you to assume the probability of having a girl ($P(\text{girl})$) was $\frac{1}{2}$, and we were interested in $G$ --- the random variable counting the number of girls in a family of 3 children. We were able to write the full distribution of $G$, in a table, or in a plot, by simple computation. What if I asked you to *sample* or *generate* data from this distribution? Sample 3 kids, call them one family, count the number of girls, say it is 2. Sample another group of 3 kids, call them another family, count the number of girls, say it is 1. Sample another group of 3 kids, call them another family, count the number of girls, say it is 2 again. And so on, for many (fake!) families, say a billion numbers of girls in a 3-children family (0, 1, 2 or 3). If we were to plot the frequency of each result in a simple bar chart --- the percentage of families that have 0, 1, 2 or 3 girls --- how would it look like? It would look exactly like our distribution of $G$, with a small change to the label on the y-axis:
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Define the random variable
+G = np.array([0, 1, 2, 3])
+
+# Define the probability distribution
+P = np.array([1/8, 3/8, 3/8, 1/8])
+
+# Plot the probability distribution
+plt.bar(G, P)
+plt.xlabel('G')
+plt.ylabel('Frequency')
+plt.xticks(G)
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+Here, we're being an Agatha. We start with the parameters of the distribution, and we generate data from it:
+
+$$
+\text{Parameters} \rightarrow \text{Data}
+$$
+
+However, often in statistics, we work in the opposite direction. We sample a finite number of (real!) 3-children families, count the number of girls in each family, and draw the frequency of each result. Since we have a limited budget, we would usually have a lot less than a billion families, and the result would usually look like this:
+
+```{python}
+#| echo: false
+#| fig-align: center
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+G = np.array([0, 1, 2, 3])
+
+P = np.array([0.16, 0.32, 0.38, 0.14])
+
+plt.bar(G, P)
+plt.xlabel('G')
+plt.ylabel('Frequency')
+plt.xticks(G)
+plt.ylim(0, 0.4)
+plt.show()
+```
+
+Imperfect. Noisy. But we have it. And now we would want to estimate the parameter(s) of the distribution that generated it, $P(\text{girl})$. That's being a Martha.
+
+$$
+\text{Data} \rightarrow \text{Parameters}
+$$
+
+But how do we do that?
