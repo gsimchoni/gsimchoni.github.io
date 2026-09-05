@@ -85,7 +85,7 @@ $$
 $$
 
 
-The process often goes like this: Sample a finite number of (real!) 3-children families, count the number of girls in each family, and draw the frequency of each result. The *empirical* distribution. Since you have a limited budget, you usually have a lot less than a billion families, say 100, and the result might look like this:
+The process often goes like this: Sample a finite number of (real!) 3-children families, count the number of girls in each family ($G$), and draw the frequency of each result. The *empirical* distribution. Since you have a limited budget, you usually have a lot less than a billion families, say 100. Suppose you get 2 girls in one family, 1 girl in another family, and so on. You might write down the data like this: $\{G_1 = 2, G_2 = 1, \dots, G_{100} = 0\}$. The empirical distribution might look like this:
 
 ```{python}
 #| echo: false
@@ -162,12 +162,14 @@ Why yes, it is. There we tried to find the best pair of intercept and slope para
 
 Here, we're trying to find the best value of $P(\text{girl})$ by *maximizing* a reward criterion, a *likelihood* function.
 
-This likelihood is the product of the probabilities of the samples of $G$ --- number of girls in 3-children families --- that we observed, assuming these families are independent:
+This likelihood is the probability of the data. How likely is the data we observed, given a particular value of $P(\text{girl})$? We observed 100 3-children families, and measured $G$ in each of them: $\{G_1 = 2, G_2 = 1, \dots\, G_{100} = 0\}$. And assuming these families are independent, the likelihood is the product of the probabilities of these $G$'s --- the product of 100 probabilities of number of girls in 3-children families that we observed. Let's write it out:
 
 $$
 \begin{align}
-Likelihood &= P(\text{2 girls in family 1}) \times P(\text{1 girl in family 2}) \times \cdots \times P(\text{0 girls in family 100}) \\
-&= P(G = 2) \times P(G = 1) \times \cdots \times P(G = 0)
+Likelihood &= P(\text{the data we observed}) \\
+&= P(\text{2 girls in family 1}, \text{1 girl in family 2}, \dots, \text{0 girls in family 100}) \\
+&= P(G_1 = 2, G_2 = 1, \dots, G_{100} = 0) \\
+&= P(G_1 = 2) \times P(G_2 = 1) \times \cdots \times P(G_{100} = 0) \\
 \end{align}
 $$
 
@@ -243,10 +245,15 @@ plt.show()
 
 So, the MLE is the value of $P(\text{girl})$ that brings the negative likelihood curve to its minimum. If the likelihood were dependent on more parameters, if it were a much more complex function, we would have to iterate our way down the parameter space, just like we did with the sum of squares, just like a good detective does. This is learning by iteration.
 
-And if instead of $G$, we looked at $X$ --- the height in centimeters of a random person --- which is normally distributed with some mean and variance we wish to estimate? Then the likelihood would be the product of the probability *densities* of the samples of $X$ that we observed, assuming these people are independent:
+And if instead of $G$, we looked at $X$ --- the height in centimeters of a random person --- which is normally distributed with some mean and variance we wish to estimate? Suppose we observed 100 people, and measured their heights: $\{X_1 = 175, X_2 = 180, \dots, X_{100} = 165\}$. Then the likelihood would be the probability *density* of the data we observed. Assuming the heights we gathered were independent, this would be the product of the probability *densities* of the 100 samples of $X$ that we observed:
 
 $$
-Likelihood = f(X = 175) \times f(X = 180) \times \cdots \times f(X = 165)
+\begin{align}
+Likelihood &= f(\text{the data we observed}) \\
+&= f(\text{Person 1's height is 175 cm}, \text{Person 2's height is 180 cm}, \dots) \\
+&= f(X_1 = 175, X_2 = 180, \dots, X_{100} = 165) \\
+&= f(X_1 = 175) \times f(X_2 = 180) \times \cdots \times f(X_{100} = 165)
+\end{align}
 $$
 
 I didn't show you the exact formula for each of these because I don't want to scare you. But as you might have guessed, each of these is dependent on that mean and variance we wish to estimate, and we would repeat the same process of maximizing the likelihood (or minimizing the negative likelihood) to find the best values for them.
