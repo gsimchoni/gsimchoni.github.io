@@ -31,10 +31,10 @@ c. The extent to which a cow's milk production is dependent on its genetic inher
 Henderson's model was also very similar to ours, brought here in a simplified form:
 
 $$
-\text{model}_{\text{year}_i, \text{cow}_j} = \text{population mean} + \text{year effect}_i + \text{cow effect}_j
+\text{model}_{\text{year}_i, \text{cow}_j} = \text{population mean} + \text{year effect}_i + \text{cow effect}_j + \text{error}_{\text{year}_i, \text{cow}_j}
 $$
 
-That is, the milk production of a cow $j$ in a given year $i$ is the population mean, plus the effect of year $i$, plus the effect of the cow $j$. The population mean and the year effects are parameters, they are fixed. The cow effects are samples of a normally distributed random variable, $\mathcal{N}(0, \text{var}_{\text{cow}})$. Most importantly, how many parameters did Henderson have to estimate? The population mean, the three year effects, and the variance of the cow effects^[This isn't accurate. In order for this to work, we would need to either set one of the year effects to 0, or constrain the year effects to sum to 0. In addition, there is another variance of the error term, which I casually left out. But I think you get the idea.]. Doable.
+That is, the milk production of a cow $j$ in a given year $i$ is the population mean, plus the effect of year $i$, plus the effect of the cow $j$, plus an error term. The population mean and the year effects are parameters, they are fixed. The cow effects are samples of a normally distributed random variable, $\mathcal{N}(0, \text{var}_{\text{cow}})$, and the error term is a sample of a normally distributed random variable, $\mathcal{N}(0, \text{var}_{\text{error}})$. Most importantly, how many parameters did Henderson have to estimate? The population mean, the three year effects, and the two variances of the cow effects and the error term^[This isn't accurate. In order for this to work, we would need to either set one of the year effects to 0, or constrain the year effects to sum to 0. But I think you get the idea.]. Doable.
 
 Most of Henderson's paper deals with how to estimate these parameters, how to get those cow effects, and how to evaluate to what extent milk production is hereditary. We haven't talked about any of this. So why do we need this history lesson?
 
