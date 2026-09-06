@@ -127,15 +127,15 @@ So, good idea, bad execution.
 Here's a different idea. What if each kid's intercept-diff and slope-diff are not parameters, but instances of random variables --- samples!
 
 $$ \text{shoe size}_{\text{global}} = \text{intercept}_{\text{global}} + \text{slope}_{\text{global}} \times \text{age} $$
-$$ \text{shoe size}_{\text{age}, \text{kid}_1} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_1}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_1}) \times \text{age}  + \text{error}_{\text{age}, \text{kid}_1}$$
-$$ \text{shoe size}_{\text{age}, \text{kid}_2} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_2}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_2}) \times \text{age} + \text{error}_{\text{age}, \text{kid}_2}$$
+$$ \text{shoe size}_{\text{kid}_1} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_1}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_1}) \times \text{age} $$
+$$ \text{shoe size}_{\text{kid}_2} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_2}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_2}) \times \text{age} $$
 $$\vdots$$
 
-$$ \text{shoe size}_{\text{age}, \text{kid}_{10}} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_{10}}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_{10}}) \times \text{age} + \text{error}_{\text{age}, \text{kid}_{10}}$$
+$$ \text{shoe size}_{\text{kid}_{10}} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_{10}}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_{10}}) \times \text{age} $$
 
-Above the $\text{intercept}_{\text{global}}$ and $\text{slope}_{\text{global}}$ remain *fixed* parameters for all kids. However, for each kid $j$, we have two "random parameters" --- samples from two different random variables: $\text{i-diff}_{\text{kid}_j}$ and $\text{s-diff}_{\text{kid}_j}$. And at each age, we have a random error term --- a sample from a third random variable: $\text{error}_{\text{age}, \text{kid}_j}$.^[Notice that the $\text{i-diff}_{\text{kid}_j}$, $\text{s-diff}_{\text{kid}_j}$ terms are sampled once for each kid, while the $\text{error}_{\text{age}, \text{kid}_j}$ term is sampled once for each age and kid. We'll get back to this later.]
+From a first glance, it looks like nothing has changed. Indeed, the $\text{intercept}_{\text{global}}$ and $\text{slope}_{\text{global}}$ remain *fixed* parameters for all kids. However, for each kid $j$, we have two "random parameters" --- samples from two different random variables: $\text{i-diff}_{\text{kid}_j}$ and $\text{s-diff}_{\text{kid}_j}$.
 
-So that's three random variables. And not just any random variables, but normal random variables, with a mean of 0 and some variance we need to learn: $\mathcal{N}(0, \text{var}_{\text{intercept}})$, $\mathcal{N}(0, \text{var}_{\text{slope}})$, and $\mathcal{N}(0, \text{var}_{\text{error}})$. For example, these distributions could look like this:
+And not just any random variables, but normal random variables, with a mean of 0 and some variance we need to learn: $\mathcal{N}(0, \text{var}_{\text{intercept}})$ and $\mathcal{N}(0, \text{var}_{\text{slope}})$. For example, these distributions could look like this:
 
 ```{python}
 #| echo: false
@@ -150,13 +150,11 @@ colors = plt.get_cmap("tab10").colors
 x = np.linspace(-10, 10, 1001)
 sigma_i = 3.0
 sigma_s = 1.2
-sigma_e = 0.7
 
 fig, ax = plt.subplots(figsize=(7.5, 4))
 
 ax.plot(x, norm.pdf(x, 0, sigma_i), color=colors[0])
 ax.plot(x, norm.pdf(x, 0, sigma_s), color=colors[1])
-ax.plot(x, norm.pdf(x, 0, sigma_e), color=colors[2])
 
 ax.annotate(r"$\mathcal{N}(0, \mathrm{var}_{\text{intercept}})$",
             xy=(4.5, norm.pdf(4.5, 0, sigma_i)), xytext=(6.5, 0.16),
@@ -168,24 +166,34 @@ ax.annotate(r"$\mathcal{N}(0, \mathrm{var}_{\text{slope}})$",
             color=colors[1], ha="left", va="center",
             arrowprops=dict(arrowstyle="->", color=colors[1]))
 
-ax.annotate(r"$\mathcal{N}(0, \mathrm{var}_{\text{error}})$",
-            xy=(-1.4, norm.pdf(-1.4, 0, sigma_e)), xytext=(-8.5, 0.5),
-            color=colors[2], ha="left", va="center",
-            arrowprops=dict(arrowstyle="->", color=colors[2]))
-
 ax.set_xlabel("x")
 ax.set_ylabel("f(x)")
-ax.set_ylim(0, 0.6)
+ax.set_ylim(0, 0.4)
 fig.tight_layout()
 plt.show()
 ```
 
-To make it concrete, imagine Kid 1 sampled (once!) an $\text{i-diff}_{\text{kid}_1}$ sample of +2.5 from the $\mathcal{N}(0, \text{var}_{\text{intercept}})$ distribution, and an $\text{s-diff}_{\text{kid}_1}$ sample of +0.5 from the $\mathcal{N}(0, \text{var}_{\text{slope}})$ distribution. Kid 2 sampled an $\text{i-diff}_{\text{kid}_2}$ sample of -1.0, and a $\text{s-diff}_{\text{kid}_2}$ sample of +0.2. And so on. And at each age or measurement, they sampled another small error term from the $\mathcal{N}(0, \text{var}_{\text{error}})$ distribution.^[So that even if we were to measure the same kid at the same age multiple times, we might get slightly different shoe sizes, due to measurement error.] Their shoe sizes would be calculated according to the above equations. That's the model.
+To make it concrete, imagine Kid 1 sampled (once!) an $\text{i-diff}_{\text{kid}_1}$ sample of +2.5 from the $\mathcal{N}(0, \text{var}_{\text{intercept}})$ distribution, and an $\text{s-diff}_{\text{kid}_1}$ sample of +0.5 from the $\mathcal{N}(0, \text{var}_{\text{slope}})$ distribution. Kid 2 sampled an $\text{i-diff}_{\text{kid}_2}$ sample of -1.0, and an $\text{s-diff}_{\text{kid}_2}$ sample of +0.2. And so on. Their shoe sizes would be calculated according to the above equations. That's the model.
 
 Let's not worry for a moment how we would evaluate these random-variable samples, $\text{i-diff}_{\text{kid}_1}$, $\text{s-diff}_{\text{kid}_1}$, $\text{i-diff}_{\text{kid}_2}$, $\text{s-diff}_{\text{kid}_2}$, etc., and just imagine we have some way to get their values.
 
 What would we gain from this?
 
-A lot. For one, we would have only three additional parameters to learn --- instead of 20! --- the variances of the random variables' normal distributions. All intercept-diffs will *share* a single parameter, and all slope-diffs will *share* a single parameter. Much less chance of overfitting. In addition, we will later show how treating each kid's intercept-diff and slope-diff as a random variable sample makes them *shrink* towards 0, making each kid's intercept and slope closer to the global model's intercept and slope, and the fewer observations a kid has, the higher the shrinkage. Why is that a good thing? That overfitting again, you want to take a kid's intercept and slope with a grain of salt if they are based on fewer observations. Moreover, those $\text{var}_{\text{intercept}}$, $\text{var}_{\text{slope}}$, and $\text{var}_{\text{error}}$ parameters --- for some researchers, they could mean a lot, or even everything.^[For now, ask yourself: what does it mean if they are very very small, close to zero? Very large?] Lastly, we have just crossed the border towards --- brace yourselves, trust me, it won't hurt --- probabilistic models. Models based on random variables. Models based on probability. These tend to be more robust and to some extent more interpretable.
+A lot. For one, we would have only two additional parameters to learn --- instead of 20! --- the variances of the random variables' normal distributions. All intercept-diffs will *share* a single parameter, and all slope-diffs will *share* a single parameter. Much less chance of overfitting. In addition, we will later show how treating each kid's intercept-diff and slope-diff as a random variable sample makes them *shrink* towards 0, making each kid's intercept and slope closer to the global model's intercept and slope, and the fewer observations a kid has, the higher the shrinkage. Why is that a good thing? That overfitting again, you want to take a kid's intercept and slope with a grain of salt if they are based on fewer observations. Moreover, those $\text{var}_{\text{intercept}}$ and $\text{var}_{\text{slope}}$ parameters --- for some researchers, they could mean a lot, or even everything.^[For now, ask yourself: what does it mean if they are very very small, close to zero? Very large?] Lastly, we have just crossed the border towards --- brace yourselves, trust me, it won't hurt --- probabilistic models. Models based on random variables. Models based on probability. These tend to be more robust and to some extent more interpretable.
+
+Just one more change to the model before we go.
+
+If you are especially perceptive, you might have noticed that the model, as it is, does not make sense --- not of the data plotted above, and not of any realistic data. Let's assume --- again --- that all parameters are known: the fixed ones and the random ones, intercept and slope. The model is still too strict. It insists that each kid's shoe sizes over the years lie on a perfect straight line, and leaves no wiggle room. You might say, as we've mentioned [before](04_overfitting.qmd), that all models are wrong, but this is the model being stubbornly wrong.
+
+Wiggle room --- noise, for a better term --- comes from many sources. We usually speak of two: measurement error (here it makes less sense, as shoe sizes are discrete with very few values, but think of the number of crisps in a bag), and model or systematic error. Yes, we are aware that even in the ages 1 through 10 a kid's shoe size doesn't lie on a straight line, but we are willing to model it as such, due to all the reasons we talked about, including overfitting (there's only so much our model can do with 20 observations). We put this all in one basket, call it error, and add it to the model:
+
+$$ \text{shoe size}_{\text{global}} = \text{intercept}_{\text{global}} + \text{slope}_{\text{global}} \times \text{age} $$
+$$ \text{shoe size}_{\text{age}, \text{kid}_1} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_1}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_1}) \times \text{age} + \text{error}_{\text{age}, \text{kid}_1} $$
+$$ \text{shoe size}_{\text{age}, \text{kid}_2} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_2}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_2}) \times \text{age} + \text{error}_{\text{age}, \text{kid}_2} $$
+$$\vdots$$
+
+$$ \text{shoe size}_{\text{age}, \text{kid}_{10}} = (\text{intercept}_{\text{global}} + \text{i-diff}_{\text{kid}_{10}}) + (\text{slope}_{\text{global}} + \text{s-diff}_{\text{kid}_{10}}) \times \text{age} + \text{error}_{\text{age}, \text{kid}_{10}} $$
+
+This error term, unlike the intercept-diffs and slope-diffs, which are sampled once for each kid, is sampled at every age --- or every measurement, in general --- from a $\mathcal{N}(0, \text{var}_{\text{error}})$ distribution. So that even if we were to measure the same kid at the same age multiple times, we might get slightly different shoe sizes. That adds yet another parameter to estimate, $\text{var}_{\text{error}}$. But we will treat these error terms a bit differently, as inherent to the data. They are not "random parameters" in the sense of the intercept-diffs and slope-diffs, and we will not try to estimate them.
 
 So, a model with both *fixed* parameters and *random* parameters? That's crazy. I bet you're dying to know how it works. Soon. Very soon. But first, a short history lesson.
