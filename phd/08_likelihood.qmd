@@ -162,7 +162,7 @@ Why yes, it is. There we tried to find the best pair of intercept and slope para
 
 Here, we're trying to find the best value of $P(\text{girl})$ by *maximizing* a reward criterion, a *likelihood* function.
 
-This likelihood is the probability of the data. How likely is the data we observed, given a particular value of $P(\text{girl})$? We observed 100 3-children families, and measured $G$ in each of them: $\{G_1 = 2, G_2 = 1, \dots\, G_{100} = 0\}$. And assuming these families are independent, the likelihood is the product of the probabilities of these $G$'s --- the product of 100 probabilities of number of girls in 3-children families that we observed. Let's write it out:
+This likelihood is the probability of the data. How likely is the data we observed, given a particular value of $P(\text{girl})$? We observed 100 3-children families, and measured $G$ in each of them: $\{G_1 = 2, G_2 = 1, \dots\, G_{100} = 0\}$. And assuming these families are independent^[Independence in the colloquial sense, your intuition should suffice until the next section.], the likelihood is the product of the probabilities of these $G$'s --- the product of 100 probabilities of number of girls in 3-children families that we observed. Let's write it out:
 
 $$
 \begin{align}
@@ -256,6 +256,6 @@ Likelihood &= f(\text{the data we observed}) \\
 \end{align}
 $$
 
-I didn't show you the exact formula for each of these because I don't want to scare you. But as you might have guessed, each of these is dependent on that mean and variance we wish to estimate, and we would repeat the same process of maximizing the likelihood (or minimizing the negative likelihood) to find the best values for them.
+I didn't show you the exact formula for each of these because I don't want to scare you. But as you might have guessed, each of these is a function of that mean and variance we wish to estimate, and we would repeat the same process of maximizing the likelihood (or minimizing the negative likelihood) to find the best values for them.
 
 Now back to our model.

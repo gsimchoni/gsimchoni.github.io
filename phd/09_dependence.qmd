@@ -1,0 +1,48 @@
+---
+pagetitle: "Dependence"
+toc: true
+format:
+  html:
+    body-classes: post-page
+---
+
+![](../images/agatha.png){.post-image}
+
+# Dependence and the Anna Karenina principle
+
+As the great novelist Leo Tolstoy wrote in his 1878 novel Anna Karenina:
+
+> "Все счастливые семьи похожи друг на друга, каждая несчастливая семья несчастлива по-своему."
+
+Meaning: all happy families are alike; each unhappy family is unhappy in its own way. But it sounds much better in Russian.
+
+In probability, as in life, all happy families of independent variables are alike; each unhappy family of dependent variables is unhappy in its own way. If my grandmother were to sample an absolutely random group of 20 kids and record their age and shoe size, we would have a happy family of independent variables, and we could have multiplied their probability densities, get our likelihood and maximize it to get our parameters.
+
+Too fast? Let's take it slower.
+
+If my grandmother were to sample an absolutely random group of 20 kids and record their age and shoe size, she could have gone with the simple global model:
+
+$$
+\text{shoe size}_{\text{kid}_j} = \text{intercept}_{\text{global}} + \text{slope}_{\text{global}} \times \text{age}_j + \text{error}_{\text{kid}_j}
+$$
+
+where $\text{intercept}_{\text{global}}$ and $\text{slope}_{\text{global}}$ are the global intercept and slope, and $\text{error}_{\text{kid}_j}$ is the random error term coming from a $\mathcal{N}(0, \text{var}_{\text{error}})$ distribution. Under this model, each kid's shoe size would be independent of the other kids' shoe sizes. The shoe size of each kid $j$ would be normally distributed with a mean of $\text{intercept}_{\text{global}} + \text{slope}_{\text{global}} \times \text{age}_j$ and a variance of $\text{var}_{\text{error}}$, or:
+
+$$\mathcal{N}(\text{intercept}_{\text{global}} + \text{slope}_{\text{global}} \times \text{age}_j, \text{var}_{\text{error}})$$
+
+This actually needs proof, but we'll skip it for now. All I'm saying is that if we have a random variable $X$ (the error term) with a $\mathcal{N}(0, \text{var})$ distribution, and we add to it a constant $c$ (intercept + slope * age), then the distribution of $X + c$ is $\mathcal{N}(c, \text{var})$. If this is intuitive to you, great. If not, great. The important thing to notice is that this distribution of kid $j$'s shoe size is only a function of kid $j$ and isn't dependent of the other kids' shoe sizes. That is why I say the kids' shoe sizes would be independent, just like the heights of random individuals from the previous [post](../08_likelihood.qmd), a happy family.
+
+And the likelihood would be the product of the probability densities of each kid's shoe size:
+
+$$
+\begin{align}
+Likelihood &= f(\text{the data we observed}) \\
+&= f(\text{Kid 1's shoe size is 25.4}, \text{Kid 2's shoe size is 19.9}, \dots) \\
+&= f(\text{shoe size}_1 = 25.4, \text{shoe size}_2 = 19.9, \dots, \text{shoe size}_{20} = 33.2) \\
+&= f(\text{shoe size}_1 = 25.4) \times f(\text{shoe size}_2 = 19.9) \times \cdots \times f(\text{shoe size}_{20} = 33.2)
+\end{align}
+$$
+
+And each of those $f(\text{shoe size}_j = S)$ is a normal probability density term --- a simple yet daunting formula --- a function of the kid's age, the global intercept and slope, and the variance of the error term. So we would maximize the likelihood to get the best values for the global intercept and slope, and the variance of the error term. Independence is easy.
+
+Dependence is hard.

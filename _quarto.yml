@@ -26,6 +26,7 @@ website:
         - phd/06_rvs_in_a_model.qmd
         - phd/07_a_history_lesson.qmd
         - phd/08_likelihood.qmd
+        - phd/09_dependence.qmd
 format:
   html:
     theme: cosmo
